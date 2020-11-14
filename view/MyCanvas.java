@@ -34,5 +34,9 @@ public class MyCanvas extends JPanel {
         }
 
     }
+
+    public ArrayList<GameElement> getGameElements(){
+        return gameElements;
+    }
     
 }

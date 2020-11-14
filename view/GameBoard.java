@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 
 import javax.swing.JButton;
@@ -34,6 +35,7 @@ public class GameBoard {
         southPanel.add(startButton);
         southPanel.add(quitButton);
         cp.add(BorderLayout.SOUTH,southPanel);
+        canvas.getGameElements().add(new TextDraw("Click <start> to play", 100, 100, Color.yellow, 30));
 
     }
     
