@@ -7,7 +7,9 @@ import java.awt.Container;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
+import controller.TimerListener;
 import model.Shooter;
 import model.ShooterElement;
 
@@ -21,6 +23,7 @@ public class GameBoard {
     private JFrame window;
     private MyCanvas canvas;
     private Shooter shooter;
+    private Timer timer;
 
     public GameBoard(JFrame window) {
         this.window = window;
@@ -40,8 +43,20 @@ public class GameBoard {
         southPanel.add(quitButton);
         cp.add(BorderLayout.SOUTH,southPanel);
         canvas.getGameElements().add(new TextDraw("Click <start> to play", 100, 100, Color.yellow, 30));
-        shooter =new Shooter(GameBoard.WIDTH/2,GameBoard.HEIGHT-ShooterElement.SIZE );
-        canvas.getGameElements().add(shooter);
+        timer =new Timer(50, new TimerListener(this)); 
+       
+        startButton.addActionListener(event ->{
+            shooter =new Shooter(GameBoard.WIDTH/2,GameBoard.HEIGHT-ShooterElement.SIZE );
+            canvas.getGameElements().clear();
+            canvas.getGameElements().add(shooter);
+            timer.start();
+
+
+        });
+    }
+
+    public MyCanvas getCanvas() {
+        return canvas;
     }
     
 }
