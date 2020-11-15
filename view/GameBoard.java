@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import controller.KeyController;
 import controller.TimerListener;
 import model.Shooter;
 import model.ShooterElement;
@@ -34,9 +35,15 @@ public class GameBoard {
 
         canvas =new MyCanvas(this,WIDTH,HEIGHT);
         cp.add(BorderLayout.CENTER, canvas);
+        canvas.addKeyListener(new KeyController(this));
+        canvas.requestFocusInWindow();
+        canvas.setFocusable(true);
+
 
         JButton startButton =new JButton("Start");
         JButton quitButton =new JButton("Quit");
+        startButton.setFocusable(false);
+        quitButton.setFocusable(false);
 
         JPanel southPanel =new JPanel();
         southPanel.add(startButton);
