@@ -23,11 +23,9 @@ public class KeyController implements KeyListener {
             break;
             case KeyEvent.VK_RIGHT:
             eventQueue.add(TimerListener.EventType.KEY_RIGHT);
-
             break;
             case KeyEvent.VK_SPACE:
             eventQueue.add(TimerListener.EventType.KEY_SPACE);
-
             break;
             
         }

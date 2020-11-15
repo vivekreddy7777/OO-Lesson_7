@@ -6,7 +6,11 @@ import java.util.ArrayList;
 
 public class Shooter extends GameElement {
 
+    public  static final int UNIT_MOVE=10;
+
     private ArrayList<GameElement> components = new ArrayList<>();
+
+    private ArrayList<GameElement> weapons =new ArrayList<>();
 
     public Shooter(int x,int y){
         super(x,y,0,0);
@@ -27,14 +31,37 @@ public class Shooter extends GameElement {
 
     }
 
+    public void moveRight(){
+        super.x+=UNIT_MOVE;
+        for(var c:components){
+            c.x+=UNIT_MOVE;
+        }
+    }
+
+    public void moveLeft(){
+        super.x-=UNIT_MOVE;
+        for(var c:components){
+            c.x-=UNIT_MOVE;
+        }
+    }
+
+  public ArrayList<GameElement> getWeapons() {
+      return weapons;
+  }
     @Override
     public void render(Graphics2D g2) {
         for(var c:components){
            c.render(g2); 
         }
+
+        for(var w:weapons)
+        w.render(g2);
     }
 
     @Override
-    public void animate() { }
+    public void animate() { 
+        for (var w:weapons)
+         w.animate();
+    }
     
 }

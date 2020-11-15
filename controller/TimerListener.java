@@ -5,17 +5,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
 
+import model.Shooter;
 import view.GameBoard;
 
 public class TimerListener implements ActionListener {
+
+    public enum EventType{
+        KEY_RIGHT,KEY_LEFT,KEY_SPACE
+    }
 
     private GameBoard gameBoard;
     private LinkedList<EventType> eventQueue;
     
 
-    public enum EventType{
-        KEY_RIGHT,KEY_LEFT,KEY_SPACE
-    }
+   
 
     public TimerListener(GameBoard gameBoard){
 
@@ -34,6 +37,24 @@ public class TimerListener implements ActionListener {
     }
 
     private void processEventQueue(){
+
+        while(!eventQueue.isEmpty()){
+            var e =eventQueue.getFirst();
+            eventQueue.removeFirst();
+            Shooter shooter =gameBoard.getShooter();
+            if(shooter==null) return;
+
+            switch(e){
+                case KEY_LEFT:
+                shooter.moveLeft();
+                break;
+                case KEY_RIGHT:
+                shooter.moveRight();
+                break;
+                case KEY_SPACE:
+
+            }
+        }
 
     }
     

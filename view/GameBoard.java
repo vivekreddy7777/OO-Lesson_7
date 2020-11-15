@@ -57,10 +57,9 @@ public class GameBoard {
         canvas.getGameElements().add(new TextDraw("Click <start> to play", 100, 100, Color.yellow, 30));
         
         timerListener=new TimerListener(this);
+       
         timer =new Timer (DELAY,timerListener);
 
-
-        timer =new Timer(DELAY, new TimerListener(this)); 
        
         startButton.addActionListener(event ->{
             shooter =new Shooter(GameBoard.WIDTH/2,GameBoard.HEIGHT-ShooterElement.SIZE );
@@ -82,6 +81,10 @@ public class GameBoard {
 
     public TimerListener getTimerListener() {
         return timerListener;
+    }
+
+    public Shooter getShooter() {
+        return shooter;
     }
     
 }
