@@ -19,12 +19,17 @@ public class GameBoard {
 
     public static final int WIDTH =600;
     public static final int HEIGHT =300;
+        
+    public static final int FPS=20; 
+
+    public static final int DELAY =1000/FPS;
 
       
     private JFrame window;
     private MyCanvas canvas;
     private Shooter shooter;
     private Timer timer;
+    private TimerListener timerListener;
 
     public GameBoard(JFrame window) {
         this.window = window;
@@ -50,7 +55,12 @@ public class GameBoard {
         southPanel.add(quitButton);
         cp.add(BorderLayout.SOUTH,southPanel);
         canvas.getGameElements().add(new TextDraw("Click <start> to play", 100, 100, Color.yellow, 30));
-        timer =new Timer(50, new TimerListener(this)); 
+        
+        timerListener=new TimerListener(this);
+        timer =new Timer (DELAY,timerListener);
+
+
+        timer =new Timer(DELAY, new TimerListener(this)); 
        
         startButton.addActionListener(event ->{
             shooter =new Shooter(GameBoard.WIDTH/2,GameBoard.HEIGHT-ShooterElement.SIZE );
@@ -64,6 +74,14 @@ public class GameBoard {
 
     public MyCanvas getCanvas() {
         return canvas;
+    }
+
+    public Timer getTimer() {
+        return timer;
+    }
+
+    public TimerListener getTimerListener() {
+        return timerListener;
     }
     
 }

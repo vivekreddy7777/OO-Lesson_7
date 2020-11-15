@@ -19,7 +19,18 @@ public class TimerListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        update();
+        processCollision();
         gameBoard.getCanvas().repaint();
     }
+    
+    private void processCollision(){
+        
+    }
+
+    private void update(){
+
+    }
+
     
 }
