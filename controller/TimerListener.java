@@ -75,6 +75,7 @@ public class TimerListener implements ActionListener {
         var enemyComposite =gameBoard.getEnemyComposite();
         shooter.removeBulletOutOfBound();
         enemyComposite.removeBombsOutOfBound();
+        enemyComposite.processCollision(shooter);
 
 
         

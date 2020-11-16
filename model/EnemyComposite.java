@@ -115,13 +115,35 @@ public class EnemyComposite extends GameElement {
             }
         }
     }
-    public void removeBombsOutOfBounds(){
+    public void removeBombsOutOfBound(){
         var remove = new ArrayList<GameElement>();
         for (var b:bombs){
-            if(e.y>=GameBoard.HEIGHT){
+            if(b.y>=GameBoard.HEIGHT){
                 remove.add(b);
             }
         }
         bombs.removeAll(remove);
     }
+
+    public void processCollision (Shooter shooter){
+        var removeBullets=new ArrayList<GameElement>();
+
+        //bullets vs enemy
+        for (var row :rows){
+            var removeEnemies =new ArrayList<GameElement>();
+            for (var enemy :row){
+                for(var bullet: shooter.getWeapons()){
+                    if(enemy.collideWith(bullet)){
+                        removeBullets.add(bullet);
+                        removeEnemies.add(enemy);
+
+                    }
+                }
+            }
+
+            row.removeAll(removeEnemies);
+        }
+        shooter.getWeapons().removeAll(removeBullets);
+    }
+
 }
