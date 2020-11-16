@@ -17,6 +17,9 @@ public class TimerListener implements ActionListener {
 
     private GameBoard gameBoard;
     private LinkedList<EventType> eventQueue;
+    private final int BOMB_DROP_FREQ=20;
+    private int frameCounter=0;
+
     
 
    
@@ -31,6 +34,7 @@ public class TimerListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        ++frameCounter;
         update();
         processEventQueue();
         processCollision();
@@ -57,6 +61,11 @@ public class TimerListener implements ActionListener {
                 shooter.getWeapons().add(new Bullet(shooter.x, shooter.y));
                 break;
             }
+        }
+
+        if(frameCounter==BOMB_DROP_FREQ){
+            gameBoard.getEnemyComposite().dropBomb();
+            frameCounter=0;
         }
 
     }

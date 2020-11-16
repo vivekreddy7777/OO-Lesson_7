@@ -3,6 +3,7 @@ package model;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
+import java.util.Random;
 
 import view.GameBoard;
 
@@ -15,13 +16,18 @@ public class EnemyComposite extends GameElement {
 
 
     private ArrayList<ArrayList<GameElement>> rows;
+    private ArrayList<GameElement>bombs;
+
     private boolean movingToRight=true;
+    private Random random =new Random();
 
 
 
     public EnemyComposite(){
 
         rows=new ArrayList<>();
+        bombs =new ArrayList<>();
+
         for(int r=0;r<NROWS;r++){
             var oneRow=new ArrayList<GameElement>();
             rows.add(oneRow);
@@ -35,10 +41,16 @@ public class EnemyComposite extends GameElement {
 
     @Override
     public void render(Graphics2D g2) {
+        //render enemy
         for(var r:rows){
-            for(var c:r){
-                c.render(g2);
+            for(var e:r){
+                e.render(g2);
             }
+        }
+
+    //render bombs
+    for(var b:bombs){
+            b.render(g2);
         }
     }
 
@@ -60,11 +72,15 @@ public class EnemyComposite extends GameElement {
             }
 
         }
+    //update x location
         for(var row :rows){
             for(var e:row){
                 e.x+=dx;
             }
         }
+    //animate bomb
+    for(var b:bombs)
+    b.animate();
     }
 
     private int rightEnd(){
@@ -88,5 +104,15 @@ public class EnemyComposite extends GameElement {
         return xEnd;
 
 
+    }
+
+    public void dropBomb(){
+        for(var row:rows){
+            for(var e:row){
+                if(random.nextFloat()<0.1F){
+                    bombs.add(new Bomb(e.x, e.y));
+                }
+            }
+        }
     }
 }
