@@ -115,4 +115,13 @@ public class EnemyComposite extends GameElement {
             }
         }
     }
+    public void removeBombsOutOfBounds(){
+        var remove = new ArrayList<GameElement>();
+        for (var b:bombs){
+            if(e.y>=GameBoard.HEIGHT){
+                remove.add(b);
+            }
+        }
+        bombs.removeAll(remove);
+    }
 }
