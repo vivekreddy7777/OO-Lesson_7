@@ -74,6 +74,9 @@ public class GameBoard {
 
 
         });
+
+        quitButton.addActionListener(event -> System.exit(0));
+
     }
 
     public MyCanvas getCanvas() {
