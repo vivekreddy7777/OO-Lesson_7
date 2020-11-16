@@ -8,6 +8,8 @@ public class Shooter extends GameElement {
 
     public  static final int UNIT_MOVE=10;
 
+    public static final int MAX_BULLETS =3;
+
     private ArrayList<GameElement> components = new ArrayList<>();
 
     private ArrayList<GameElement> weapons =new ArrayList<>();
@@ -45,9 +47,22 @@ public class Shooter extends GameElement {
         }
     }
 
-  public ArrayList<GameElement> getWeapons() {
-      return weapons;
-  }
+    public boolean canFireMoreBullets(){
+         return weapons.size() < MAX_BULLETS;
+    }
+
+    public void removeBulletOutOfBound(){
+        var remove =new ArrayList<GameElement>();
+        for (var w:weapons){
+            if(w.y<0) remove.add(w);
+        }
+        weapons.removeAll(remove);
+    }
+
+
+     public ArrayList<GameElement> getWeapons() {
+         return weapons;
+     }
     @Override
     public void render(Graphics2D g2) {
         for(var c:components){

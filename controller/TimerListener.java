@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
 
+import model.Bullet;
 import model.Shooter;
 import view.GameBoard;
 
@@ -52,17 +53,22 @@ public class TimerListener implements ActionListener {
                 shooter.moveRight();
                 break;
                 case KEY_SPACE:
-
+                if(shooter.canFireMoreBullets())
+                shooter.getWeapons().add(new Bullet(shooter.x, shooter.y));
+                break;
             }
         }
 
     }
     
     private void processCollision(){
+        gameBoard.getShooter().removeBulletOutOfBound();
         
     }
 
     private void update(){
+        for(var e:gameBoard.getCanvas().getGameElements())
+        e.animate();
 
     }
 
